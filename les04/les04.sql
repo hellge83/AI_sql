@@ -5,17 +5,17 @@ DELETE FROM communities WHERE id > 20;
 
 
 SELECT * FROM communities_users;
--- не обновлялись группы из=за primary key
+-- РЅРµ РѕР±РЅРѕРІР»СЏР»РёСЃСЊ РіСЂСѓРїРїС‹ РёР·=Р·Р° primary key
 ALTER TABLE communities_users DROP PRIMARY KEY;
 UPDATE communities_users SET community_id = FLOOR(1 + RAND() * 20);
--- оставила только уникальные строки
+-- РѕСЃС‚Р°РІРёР»Р° С‚РѕР»СЊРєРѕ СѓРЅРёРєР°Р»СЊРЅС‹Рµ СЃС‚СЂРѕРєРё
 CREATE TABLE temp LIKE communities_users;
 INSERT INTO temp SELECT DISTINCT * FROM communities_users;
 DROP TABLE communities_users;
 RENAME TABLE temp TO communities_users;
--- добавила руками до 100 записей
+-- РґРѕР±Р°РІРёР»Р° СЂСѓРєР°РјРё РґРѕ 100 Р·Р°РїРёСЃРµР№
 insert into communities_users values (20, 5),(20, 24);
--- вернула primary key
+-- РІРµСЂРЅСѓР»Р° primary key
 ALTER TABLE communities_users ADD PRIMARY KEY (community_id, user_id);
 
 
@@ -66,11 +66,11 @@ update profiles set gender='f' where gender='1';
 update profiles set gender='m' where gender='2';
 DESC profiles;
 
--- а мы заполняли photo_id?
+-- Р° РјС‹ Р·Р°РїРѕР»РЅСЏР»Рё photo_id?
 ALTER TABLE profiles ADD COLUMN photo_id INT UNSIGNED AFTER country;
 
 
 SELECT * FROM messages LIMIT 10;
--- от юзера ИЛИ другому юзеру ИЛИ сообществу:
+-- РѕС‚ СЋР·РµСЂР° РР›Р РґСЂСѓРіРѕРјСѓ СЋР·РµСЂСѓ РР›Р СЃРѕРѕР±С‰РµСЃС‚РІСѓ:
 UPDATE messages SET community_id=NULL WHERE to_user_id is not null;
 UPDATE messages SET community_id = FLOOR(1 + RAND() * 20)  WHERE community_id is not null;
