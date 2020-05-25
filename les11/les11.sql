@@ -3,12 +3,12 @@ use shop;
 -- task 1
 drop table if exists logs;
 create table logs (
---   id serial primary key,
-  created_at datetime default current_timestamp on update current_timestamp,
-  table_name varchar(255),
-  primary_id bigint unsigned,
-  name varchar(255)
-  
+	id int unsigned not null auto_increment,
+	created_at datetime default current_timestamp on update current_timestamp,
+	table_name varchar(255),
+	primary_id bigint unsigned,
+	name varchar(255),
+	primary key (id)
 ) comment = 'log table' engine=archive;
 
 delimiter //
