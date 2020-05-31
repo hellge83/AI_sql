@@ -293,8 +293,6 @@ alter table ads.site_prebid_config
 -- переиндексация нужна только при добавлении нового клиента и создания для него объектов в dfp
 use ads;
 
-create index ad_unit_id_idx on ad_unit(id);
-
 create index ad_unit_name_uq on ad_unit(name);
 
 create index ad_unit_code_idx on ad_unit(name);
@@ -303,42 +301,20 @@ create index ad_unit_prebid_config_ad_unit_id_idx on ad_unit_prebid_config(ad_un
 
 create index ad_unit_size_ad_unit_id_idx on ad_unit_size(ad_unit_id);
 
-create index advertiser_id_idx on advertiser(id);
-
-create index bidder_id_idx on bidder(id);
-
-create index creative_id_idx on creative(id);
-
-create index dfp_account_id_idx on dfp_account(id);
-
-create index line_item_id_idx on line_item(id);
-
 create index line_item_name_idx on line_item(name);
 
 create index line_item_name_order_id_idx on line_item(order_id);
 
 create index line_item_targeting_line_item_id_idx on line_item_targeting(line_item_id);
 
-create index orders_id_idx on orders(id);
-
 create index orders_name_idx on orders(name);
 
 create index orders_advertiser_id_idx on orders(advertiser_id);
 
-create index site_id_idx on site(id);
-
 create index site_name_idx on site(name);
-
-create index site_prebid_config_site_id_idx on site_prebid_config(site_id);
-
-create index size_id_idx on size(id);
 
 create index size_name_idx on size(name);
 
-create unique index targeting_key_id_uq on targeting_key(id);
-
 create index targeting_key_dfp_account_id_idx on targeting_key(dfp_account_id);
-
-create unique index targeting_value_id_uq on targeting_value(id);
 
 create index targeting_value_key_id_idx on targeting_value(key_id);
